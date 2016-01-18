@@ -1,0 +1,57 @@
+services:
+#### Gestion des utilisateurs ####
+    admin.usertype:
+        class: Admin\AdminBundle\Admin\UserTypeAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\UserType, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion groupes / utilisateurs, label: Types d'utilisateur}
+
+    admin.usergroup:
+        class: Admin\AdminBundle\Admin\UserGroupAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\UserGroup, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion groupes / utilisateurs, label: Groupes}
+
+    admin.user:
+        class: Admin\AdminBundle\Admin\UserAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\User, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion groupes / utilisateurs, label: Utilisateurs}
+
+#### Gestion des QCM ####
+    admin.category:
+        class: Admin\AdminBundle\Admin\CategoryAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\Category, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion QCM, label: Catégories}
+
+    admin.qcm:
+        class: Admin\AdminBundle\Admin\QcmAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\Qcm, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion QCM, label: QCM}
+    
+    admin.question:
+        class: Admin\AdminBundle\Admin\QuestionAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\Question, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion QCM, label: Questions}
+
+    admin.answer:
+        class: Admin\AdminBundle\Admin\AnswerAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\Answer, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion QCM, label: Réponses}
+
+#### Gestion des médias ####
+    admin.mediatype:
+        class: Admin\AdminBundle\Admin\MediaTypeAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\MediaType, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion média, label: Type de média}
+
+    admin.media:
+        class: Admin\AdminBundle\Admin\MediaAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\Media, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Gestion média, label: Média}

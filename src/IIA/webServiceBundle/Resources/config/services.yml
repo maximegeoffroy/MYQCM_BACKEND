@@ -1,0 +1,4 @@
+services:
+#    ii_aweb_service.example:
+#        class: IIA\webServiceBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
