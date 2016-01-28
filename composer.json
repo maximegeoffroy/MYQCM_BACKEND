@@ -25,7 +25,8 @@
         "sonata-project/admin-bundle": "2.3.*",
         "sonata-project/doctrine-orm-admin-bundle": "2.3.*",
         "friendsofsymfony/rest-bundle": "~1.7",
-        "jms/serializer-bundle": "~1.1"
+        "jms/serializer-bundle": "~1.1",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7",

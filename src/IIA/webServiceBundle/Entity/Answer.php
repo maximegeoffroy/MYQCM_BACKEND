@@ -56,6 +56,12 @@ class Answer
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\Question", inversedBy="answers")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $question;
+
 
     /**
      * Get id
@@ -190,5 +196,47 @@ class Answer
     public function __construct(){
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Answer
+     */
+    public function addQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->question[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Answer
+     */
+    public function setQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \IIA\webServiceBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    public function __toString(){
+        return $this->getContent();
     }
 }

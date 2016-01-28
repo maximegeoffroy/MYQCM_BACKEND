@@ -42,6 +42,12 @@ class Category
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\Qcm", mappedBy="category")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $qcms;
+
 
     /**
      * Get id
@@ -128,5 +134,43 @@ class Category
     public function __construct(){
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\Qcm $qcm
+     *
+     * @return Category
+     */
+    public function addQcm(\IIA\webServiceBundle\Entity\Qcm $qcm)
+    {
+        $this->qcms[] = $qcm;
+
+        return $this;
+    }
+
+    /**
+     * Remove qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\Qcm $qcm
+     */
+    public function removeQcm(\IIA\webServiceBundle\Entity\Qcm $qcm)
+    {
+        $this->qcms->removeElement($qcm);
+    }
+
+    /**
+     * Get qcms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQcms()
+    {
+        return $this->qcms;
+    }
+
+    public function __toString(){
+        return $this->getName();
     }
 }

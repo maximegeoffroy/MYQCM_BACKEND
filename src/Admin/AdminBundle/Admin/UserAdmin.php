@@ -21,34 +21,43 @@ class UserAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, array('label' => 'Name'))
+            ->add('username', null, array('label' => 'Name'))
             ->add('firstname', null, array('label' => 'Firstname'))
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'options' => array('translation_domain' => 'FOSUserBundle'),
+                'first_options' => array('label' => 'form.password'),
+                'second_options' => array('label' => 'form.password_confirmation'),
+                'invalid_message' => 'fos_user.password.mismatch',))
             ->add('email', null, array('label' => 'Email'))
-            ->add('password', null, array('label' => 'Password'))
+            ->add('userType',null,array('label' => 'User type'))
+            ->add('userGroup',null,array('label' => 'User group'))
         ;
     }
  
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', null, array('label' => 'Name'))
+            ->add('username', null, array('label' => 'Name'))
             ->add('firstname', null, array('label' => 'Firstname'))
             ->add('email', null, array('label' => 'Email'))
-            ->add('password', null, array('label' => 'Password'))
             ->add('createdAt', null, array('label' => 'Created at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('userType',null,array('label' => 'User type'))
+            ->add('userGroup',null,array('label' => 'User group'))
         ;
     }
  
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name', null, array('label' => 'Name'))
+            ->add('username', null, array('label' => 'Name'))
             ->add('firstname', null, array('label' => 'Firstname'))
             ->add('email', null, array('label' => 'Email'))
-            ->add('password', null, array('label' => 'Password'))
             ->add('createdAt', null, array('label' => 'Created at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('userType',null,array('label' => 'User type'))
+            ->add('userGroup',null,array('label' => 'User group'))
 
             # Action sur l'objet
            ->add('_action', 'actions', array(
@@ -64,14 +73,14 @@ class UserAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name', null, array('label' => 'Name'))
+            ->add('username', null, array('label' => 'Name'))
             ->add('firstname', null, array('label' => 'Firstname'))
             ->add('email', null, array('label' => 'Email'))
-            ->add('password', null, array('label' => 'Password'))
             ->add('createdAt', null, array('label' => 'Created at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('userType',null,array('label' => 'User type'))
+            ->add('userGroup',null,array('label' => 'User group'))
         ;
     }
 }
-
 ?>

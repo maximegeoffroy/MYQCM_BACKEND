@@ -22,6 +22,8 @@ class MediaAdmin extends Admin
         $formMapper
             ->add('name', null, array('label' => 'Name'))
             ->add('url', null, array('label' => 'Url'))
+            ->add('mediaType', null, array('label' => 'Media type'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
  
@@ -30,6 +32,8 @@ class MediaAdmin extends Admin
         $datagridMapper
             ->add('name', null, array('label' => 'Name'))
             ->add('url', null, array('label' => 'Url'))
+            ->add('mediaType', null, array('label' => 'Media type'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
  
@@ -38,6 +42,8 @@ class MediaAdmin extends Admin
         $listMapper
             ->add('name', null, array('label' => 'Name'))
             ->add('url', null, array('label' => 'Url'))
+            ->add('mediaType', null, array('label' => 'Media type'))
+            ->add('question', null, array('label' => 'Question'))
 
             # Action sur l'objet
            ->add('_action', 'actions', array(
@@ -55,6 +61,8 @@ class MediaAdmin extends Admin
         $showMapper
             ->add('name', null, array('label' => 'Name'))
             ->add('url', null, array('label' => 'Url'))
+            ->add('mediaType', null, array('label' => 'Media type'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
 }

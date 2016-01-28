@@ -56,6 +56,12 @@ class Answer
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\Question", inversedBy="answers")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $question;
+
 
     /**
      * Get id
@@ -114,5 +120,123 @@ class Answer
     {
         return $this->point;
     }
-}
 
+    /**
+     * Set isValid
+     *
+     * @param boolean $isValid
+     *
+     * @return Answer
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isValid
+     *
+     * @return boolean
+     */
+    public function getIsValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Answer
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Answer
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function __construct(){
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Answer
+     */
+    public function addQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->question[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Answer
+     */
+    public function setQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \IIA\webServiceBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    public function __toString(){
+        return $this->getContent();
+    }
+}

@@ -25,6 +25,7 @@ class QcmAdmin extends Admin
             ->add('startDate', null, array('label' => 'Start at'))
             ->add('endDate', null, array('label' => 'End at'))
             ->add('duration', null, array('label' => 'Duration'))
+            ->add('category', null, array('label' => 'Category'))
         ;
     }
  
@@ -37,6 +38,8 @@ class QcmAdmin extends Admin
             ->add('duration', null, array('label' => 'Duration'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Update at'))
+            ->add('questions', null, array('label' => 'Questions list'))
+            ->add('category', null, array('label' => 'Category'))
         ;
     }
  
@@ -49,6 +52,8 @@ class QcmAdmin extends Admin
             ->add('duration', null, array('label' => 'Duration'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Update at'))
+            ->add('questions', null, array('label' => 'Questions list'))
+            ->add('category', null, array('label' => 'Category'))
 
             # Action sur l'objet
            ->add('_action', 'actions', array(
@@ -70,6 +75,8 @@ class QcmAdmin extends Admin
             ->add('duration', null, array('label' => 'Duration'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Update at'))
+            ->add('questions', null, array('label' => 'Questions list'))
+            ->add('category', null, array('label' => 'Category'))
         ;
     }	
 }

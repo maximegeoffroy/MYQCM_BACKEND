@@ -30,7 +30,7 @@ services:
         arguments: [~, IIA\webServiceBundle\Entity\Qcm, ~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Gestion QCM, label: QCM}
-    
+
     admin.question:
         class: Admin\AdminBundle\Admin\QuestionAdmin
         arguments: [~, IIA\webServiceBundle\Entity\Question, ~]
@@ -55,3 +55,10 @@ services:
         arguments: [~, IIA\webServiceBundle\Entity\Media, ~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Gestion média, label: Média}
+
+#### Link user or group to qcm ####
+    admin.qcmtouser:
+        class: Admin\AdminBundle\Admin\QcmUserAdmin
+        arguments: [~, IIA\webServiceBundle\Entity\QcmUser, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Liaison User/Group to QCM, label: Qcm to user}

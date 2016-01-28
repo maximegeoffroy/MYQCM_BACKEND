@@ -42,6 +42,12 @@ class Category
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\Qcm", mappedBy="category")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $qcms;
+
 
     /**
      * Get id
@@ -77,9 +83,94 @@ class Category
         return $this->name;
     }
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Category
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Category
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
     public function __construct(){
         $this->createdAt = new \DateTime();
-        $this->updateAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\Qcm $qcm
+     *
+     * @return Category
+     */
+    public function addQcm(\IIA\webServiceBundle\Entity\Qcm $qcm)
+    {
+        $this->qcms[] = $qcm;
+
+        return $this;
+    }
+
+    /**
+     * Remove qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\Qcm $qcm
+     */
+    public function removeQcm(\IIA\webServiceBundle\Entity\Qcm $qcm)
+    {
+        $this->qcms->removeElement($qcm);
+    }
+
+    /**
+     * Get qcms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQcms()
+    {
+        return $this->qcms;
+    }
+
+    public function __toString(){
+        return $this->getName();
     }
 }
-

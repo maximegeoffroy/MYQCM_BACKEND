@@ -2,15 +2,16 @@
 
 namespace IIA\webServiceBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * user
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\userRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,50 +20,52 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255)
-     */
-    private $firstname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
+    protected $firstname;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\UserType")
+     * @ORM\JoinColumn(nullable=true)
+    */
+    protected $userType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\UserGroup")
+     * @ORM\JoinColumn(nullable=true)
+    */
+    protected $userGroup;
+
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\QcmUser", mappedBy="user")
+    */
+    protected $userQcms;
+
+    //Constructor
+    public function __construct(){
+        parent::__construct();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -72,30 +75,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return user
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -122,29 +101,17 @@ class User
         return $this->firstname;
     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return user
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     /**
-     * Get email
+     * Get username
      *
      * @return string
      */
-    public function getEmail()
+    public function getUsername()
     {
-        return $this->email;
+        return $this->username;
     }
+
 
     /**
      * Set createdAt
@@ -194,8 +161,123 @@ class User
         return $this->updatedAt;
     }
 
-    public function __construct(){
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+    /**
+     * Set userType
+     *
+     * @param \IIA\webServiceBundle\Entity\UserType $userType
+     *
+     * @return User
+     */
+    public function setUserType(\IIA\webServiceBundle\Entity\UserType $userType)
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get userType
+     *
+     * @return \IIA\webServiceBundle\Entity\UserType
+     */
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    /**
+     * Set userGroup
+     *
+     * @param \IIA\webServiceBundle\Entity\UserGroup $userGroup
+     *
+     * @return User
+     */
+    public function setUserGroup(\IIA\webServiceBundle\Entity\UserGroup $userGroup)
+    {
+        $this->userGroup = $userGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get userGroup
+     *
+     * @return \IIA\webServiceBundle\Entity\UserGroup
+     */
+    public function getUserGroup()
+    {
+        return $this->userGroup;
+    }
+
+    public function __toString(){
+        return $this->getUsername() . " " . $this->getFirstname();
+    }
+
+    /**
+     * Add qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $qcm
+     *
+     * @return User
+     */
+    public function addQcm(\IIA\webServiceBundle\Entity\QcmUser $qcm)
+    {
+        $this->qcms[] = $qcm;
+
+        return $this;
+    }
+
+    /**
+     * Remove qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $qcm
+     */
+    public function removeQcm(\IIA\webServiceBundle\Entity\QcmUser $qcm)
+    {
+        $this->qcms->removeElement($qcm);
+    }
+
+    /**
+     * Get qcms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQcms()
+    {
+        return $this->qcms;
+    }
+
+    /**
+     * Add userQcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $userQcm
+     *
+     * @return User
+     */
+    public function addUserQcm(\IIA\webServiceBundle\Entity\QcmUser $userQcm)
+    {
+        $this->userQcms[] = $userQcm;
+
+        return $this;
+    }
+
+    /**
+     * Remove userQcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $userQcm
+     */
+    public function removeUserQcm(\IIA\webServiceBundle\Entity\QcmUser $userQcm)
+    {
+        $this->userQcms->removeElement($userQcm);
+    }
+
+    /**
+     * Get userQcms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserQcms()
+    {
+        return $this->userQcms;
     }
 }

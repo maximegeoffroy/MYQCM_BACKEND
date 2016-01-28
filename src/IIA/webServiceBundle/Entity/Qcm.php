@@ -63,6 +63,23 @@ class Qcm
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\Question", mappedBy="qcm")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $questions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\Category", inversedBy="qcms")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\QcmUser", mappedBy="qcm")
+    */
+    private $userQcms;
+
 
     /**
      * Get id
@@ -221,5 +238,135 @@ class Qcm
     public function __construct(){
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Qcm
+     */
+    public function addQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     */
+    public function removeQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \IIA\webServiceBundle\Entity\Category $category
+     *
+     * @return Qcm
+     */
+    public function setCategory(\IIA\webServiceBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \IIA\webServiceBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $user
+     *
+     * @return Qcm
+     */
+    public function addUser(\IIA\webServiceBundle\Entity\QcmUser $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $user
+     */
+    public function removeUser(\IIA\webServiceBundle\Entity\QcmUser $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function __toString(){
+        return $this->getName();
+    }
+
+    /**
+     * Add userQcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $userQcm
+     *
+     * @return Qcm
+     */
+    public function addUserQcm(\IIA\webServiceBundle\Entity\QcmUser $userQcm)
+    {
+        $this->userQcms[] = $userQcm;
+
+        return $this;
+    }
+
+    /**
+     * Remove userQcm
+     *
+     * @param \IIA\webServiceBundle\Entity\QcmUser $userQcm
+     */
+    public function removeUserQcm(\IIA\webServiceBundle\Entity\QcmUser $userQcm)
+    {
+        $this->userQcms->removeElement($userQcm);
+    }
+
+    /**
+     * Get userQcms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserQcms()
+    {
+        return $this->userQcms;
     }
 }

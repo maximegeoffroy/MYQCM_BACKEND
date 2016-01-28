@@ -42,6 +42,22 @@ class Question
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\Answer", mappedBy="question")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $answers;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\Qcm", inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $qcm;
+
+   /**
+     * @ORM\OneToOne(targetEntity="IIA\webServiceBundle\Entity\Media", mappedBy="question")
+    */
+    private $media;
 
     /**
      * Get id
@@ -125,8 +141,94 @@ class Question
         return $this->updatedAt;
     }
 
+    /**
+     * Set media
+     *
+     * @param \IIA\webServiceBundle\Entity\Media $media
+     *
+     * @return Question
+     */
+    public function setMedia(\IIA\webServiceBundle\Entity\Media $media = null)
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \IIA\webServiceBundle\Entity\Media
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    public function __toString(){
+        return $this->getContent();
+    }
+
     public function __construct(){
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Add answer
+     *
+     * @param \IIA\webServiceBundle\Entity\Answer $answer
+     *
+     * @return Question
+     */
+    public function addAnswer(\IIA\webServiceBundle\Entity\Answer $answer)
+    {
+        $this->answers[] = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Remove answer
+     *
+     * @param \IIA\webServiceBundle\Entity\Answer $answer
+     */
+    public function removeAnswer(\IIA\webServiceBundle\Entity\Answer $answer)
+    {
+        $this->answers->removeElement($answer);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
+
+    /**
+     * Set qcm
+     *
+     * @param \IIA\webServiceBundle\Entity\Qcm $qcm
+     *
+     * @return Question
+     */
+    public function setQcm(\IIA\webServiceBundle\Entity\Qcm $qcm)
+    {
+        $this->qcm = $qcm;
+
+        return $this;
+    }
+
+    /**
+     * Get qcm
+     *
+     * @return \IIA\webServiceBundle\Entity\Qcm
+     */
+    public function getQcm()
+    {
+        return $this->qcm;
     }
 }

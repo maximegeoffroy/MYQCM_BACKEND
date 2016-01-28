@@ -31,6 +31,7 @@ class CategoryAdmin extends Admin
             ->add('name', null, array('label' => 'Name'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('qcms', null, array('label' => 'Qcm list'))
         ;
     }
  
@@ -40,6 +41,7 @@ class CategoryAdmin extends Admin
             ->add('name', null, array('label' => 'Name'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('qcms', null, array('label' => 'Qcm list'))
 
             # Action sur l'objet
            ->add('_action', 'actions', array(
@@ -58,6 +60,7 @@ class CategoryAdmin extends Admin
             ->add('name', null, array('label' => 'Name'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('qcms', null, array('label' => 'Qcm list'))
         ;
     }
 }

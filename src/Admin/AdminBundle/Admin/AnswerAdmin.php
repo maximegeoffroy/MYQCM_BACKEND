@@ -23,6 +23,7 @@ class AnswerAdmin extends Admin
             ->add('content', null, array('label' => 'Content'))
             ->add('point', null, array('label' => 'Point'))
             ->add('isValid', null, array('label' => 'Is valid'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
  
@@ -34,6 +35,7 @@ class AnswerAdmin extends Admin
             ->add('isValid', null, array('label' => 'Is valid'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
  
@@ -45,6 +47,7 @@ class AnswerAdmin extends Admin
             ->add('isValid', null, array('label' => 'Is valid'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('question', null, array('label' => 'Question'))
 
             # Action sur l'objet
            ->add('_action', 'actions', array(
@@ -65,6 +68,7 @@ class AnswerAdmin extends Admin
             ->add('isValid', null, array('label' => 'Is valid'))
             ->add('createdAt', null, array('label' => 'Create at'))
             ->add('updatedAt', null, array('label' => 'Updated at'))
+            ->add('question', null, array('label' => 'Question'))
         ;
     }
 }

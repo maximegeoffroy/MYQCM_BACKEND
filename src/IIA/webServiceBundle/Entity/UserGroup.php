@@ -125,6 +125,10 @@ class UserGroup
         return $this->updatedAt;
     }
 
+    public function __toString(){
+        return $this->getName();
+    }
+
     public function __construct(){
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();

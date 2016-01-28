@@ -35,6 +35,18 @@ class Media
      */
     private $url;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\MediaType")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $mediaType;
+
+    /**
+     * @ORM\OneToOne(targetEntity="IIA\webServiceBundle\Entity\Question", inversedBy="media")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $question;
+
 
     /**
      * Get id
@@ -93,5 +105,56 @@ class Media
     {
         return $this->url;
     }
-}
 
+    /**
+     * Set mediaType
+     *
+     * @param \IIA\webServiceBundle\Entity\MediaType $mediaType
+     *
+     * @return Media
+     */
+    public function setMediaType(\IIA\webServiceBundle\Entity\MediaType $mediaType)
+    {
+        $this->mediaType = $mediaType;
+
+        return $this;
+    }
+
+    /**
+     * Get mediaType
+     *
+     * @return \IIA\webServiceBundle\Entity\MediaType
+     */
+    public function getMediaType()
+    {
+        return $this->mediaType;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \IIA\webServiceBundle\Entity\Question $question
+     *
+     * @return Media
+     */
+    public function setQuestion(\IIA\webServiceBundle\Entity\Question $question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \IIA\webServiceBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    public function __toString(){
+        return $this->getName();
+    }
+}
