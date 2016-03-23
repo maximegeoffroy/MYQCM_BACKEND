@@ -3,12 +3,18 @@
 namespace IIA\webServiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\CategoryRepository")
+ * @HasLifecycleCallbacks()
+ *
+ * @ExclusionPolicy("all")
  */
 class Category
 {
@@ -18,6 +24,7 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +32,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Expose
      */
     private $name;
 
@@ -32,6 +40,7 @@ class Category
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Expose
      */
     private $createdAt;
 
@@ -39,6 +48,7 @@ class Category
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Expose
      */
     private $updatedAt;
 
@@ -109,14 +119,14 @@ class Category
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      *
      * @return Category
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

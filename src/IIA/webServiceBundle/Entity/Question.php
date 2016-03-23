@@ -3,12 +3,15 @@
 namespace IIA\webServiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * Question
  *
  * @ORM\Table(name="question")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\QuestionRepository")
+ *
+ * @HasLifecycleCallbacks()
  */
 class Question
 {
@@ -119,14 +122,14 @@ class Question
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      *
      * @return Question
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

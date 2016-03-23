@@ -1,0 +1,4 @@
+users:
+    type: rest
+    resource:     IIA\webServiceBundle\Controller\UserRestController
+    name_prefix:  api_

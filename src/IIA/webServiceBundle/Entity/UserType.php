@@ -3,12 +3,15 @@
 namespace IIA\webServiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * UserType
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @HasLifecycleCallbacks()
  */
 class UserType
 {
@@ -103,14 +106,14 @@ class UserType
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      *
      * @return UserType
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

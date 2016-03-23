@@ -31,7 +31,7 @@ class QcmUser
     /**
      * @var float
      *
-     * @ORM\Column(name="note", type="float")
+     * @ORM\Column(name="note", type="float",nullable=true)
      */
     private $note;
 
@@ -152,5 +152,10 @@ class QcmUser
     public function getUser()
     {
         return $this->user;
+    }
+
+    //Constructor
+    public function __construct(){
+        $this->isDone = false;
     }
 }

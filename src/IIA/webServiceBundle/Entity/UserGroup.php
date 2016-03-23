@@ -3,12 +3,15 @@
 namespace IIA\webServiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * UserGroup
  *
  * @ORM\Table(name="user_group")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\UserGroupRepository")
+ *
+ * @HasLifecycleCallbacks()
  */
 class UserGroup
 {
@@ -103,14 +106,13 @@ class UserGroup
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
-     *
      * @return UserGroup
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

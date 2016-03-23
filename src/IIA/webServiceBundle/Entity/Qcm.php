@@ -3,12 +3,18 @@
 namespace IIA\webServiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * Qcm
  *
  * @ORM\Table(name="qcm")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\QcmRepository")
+ *
+ * @HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class Qcm
 {
@@ -18,6 +24,7 @@ class Qcm
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +32,7 @@ class Qcm
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Expose
      */
     private $name;
 
@@ -32,6 +40,7 @@ class Qcm
      * @var \DateTime
      *
      * @ORM\Column(name="start_date", type="datetime")
+     * @Expose
      */
     private $startDate;
 
@@ -39,6 +48,7 @@ class Qcm
      * @var \DateTime
      *
      * @ORM\Column(name="end_date", type="datetime")
+     * @Expose
      */
     private $endDate;
 
@@ -46,6 +56,7 @@ class Qcm
      * @var int
      *
      * @ORM\Column(name="duration", type="integer")
+     * @Expose
      */
     private $duration;
 
@@ -53,6 +64,7 @@ class Qcm
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Expose
      */
     private $createdAt;
 
@@ -60,18 +72,21 @@ class Qcm
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Expose
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\Question", mappedBy="qcm")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
     */
     private $questions;
 
     /**
      * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\Category", inversedBy="qcms")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose
     */
     private $category;
 
@@ -213,14 +228,14 @@ class Qcm
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      *
      * @return Qcm
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -233,11 +248,6 @@ class Qcm
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    public function __construct(){
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -332,10 +342,6 @@ class Qcm
         return $this->users;
     }
 
-    public function __toString(){
-        return $this->getName();
-    }
-
     /**
      * Add userQcm
      *
@@ -368,5 +374,14 @@ class Qcm
     public function getUserQcms()
     {
         return $this->userQcms;
+    }
+
+    public function __toString(){
+        return $this->getName(); 
+    }
+
+    public function __construct(){
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 }

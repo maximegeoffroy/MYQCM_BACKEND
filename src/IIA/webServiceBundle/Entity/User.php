@@ -4,12 +4,19 @@ namespace IIA\webServiceBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * user
  *
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\userRepository")
+ *
+ *
+ * @HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -25,7 +32,18 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * 
+     * @Expose
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
+     * 
+     * @Expose
      */
     protected $firstname;
 
@@ -33,6 +51,8 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     *
+     * @Expose 
      */
     protected $createdAt;
 
@@ -40,23 +60,27 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Expose
      */
     protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\UserType")
      * @ORM\JoinColumn(nullable=true)
+     * @Expose
     */
     protected $userType;
 
     /**
      * @ORM\ManyToOne(targetEntity="IIA\webServiceBundle\Entity\UserGroup")
      * @ORM\JoinColumn(nullable=true)
+     * @Expose
     */
     protected $userGroup;
 
     /**
      * @ORM\OneToMany(targetEntity="IIA\webServiceBundle\Entity\QcmUser", mappedBy="user")
+     * @Expose
     */
     protected $userQcms;
 
@@ -75,6 +99,31 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -139,14 +188,14 @@ class User extends BaseUser
 
     /**
      * Set updatedAt
-     *
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      *
      * @return User
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

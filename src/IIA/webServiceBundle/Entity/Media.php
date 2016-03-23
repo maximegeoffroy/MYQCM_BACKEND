@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\MediaRepository")
+ *
  */
 class Media
 {
