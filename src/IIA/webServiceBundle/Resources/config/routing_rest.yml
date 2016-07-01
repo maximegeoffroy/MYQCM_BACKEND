@@ -2,3 +2,7 @@ users:
     type: rest
     resource:     IIA\webServiceBundle\Controller\UserRestController
     name_prefix:  api_
+
+post_connection:
+    pattern: /auth
+    defaults: { _controller:IIAwebServiceBundle:AuthRest:postConnection}
