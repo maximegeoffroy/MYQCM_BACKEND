@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * QcmUser
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Entity\QcmUserRepository")
+ * @ORM\Entity(repositoryClass="IIA\webServiceBundle\Repository\QcmUserRepository")
  */
 class QcmUser
 {

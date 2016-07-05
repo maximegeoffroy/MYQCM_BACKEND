@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Finder\Finder;
 use FOS\RestBundle\Controller\FOSRestController;
-use IIA\ApiBundle\Entity\Configuration;
 
 class AuthRestController extends Controller
 {

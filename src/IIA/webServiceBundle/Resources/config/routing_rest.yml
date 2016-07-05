@@ -6,3 +6,7 @@ users:
 post_connection:
     pattern: /auth
     defaults: { _controller:IIAwebServiceBundle:AuthRest:postConnection}
+
+update_qcm:
+   pattern: /update_qcm
+   defaults: { _controller:IIAwebServiceBundle:QcmRest:updateQcm}
